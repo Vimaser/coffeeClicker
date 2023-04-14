@@ -202,7 +202,7 @@ function tick(data) {
 
 // add a 'click' event listener to the bigCoffee element (that you referenced above)
 // the event listener should call the clickCoffee function, and pass in the global data object
-
+/*
 buyButton.addEventListener('click', function(event) {
   buyButtonClick(event, data);
 });
@@ -216,6 +216,18 @@ document.addEventListener('DOMContentLoaded', function() {
   buyChemexPressBtn.addEventListener('click', function(event) {
     buyButtonClick(event, data, 'buy_chemex');
   });
+*/
+
+// add click event listener to the bigCoffee element
+bigCoffee.addEventListener('click', function() {
+  clickCoffee(data);
+});
+
+// add click event listener to the buyButton element
+buyButton.addEventListener('click', function(event) {
+  buyButtonClick(event, data);
+});
+
 
 /*
 bigCoffee.addEventListener('click', function() {

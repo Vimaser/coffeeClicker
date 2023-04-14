@@ -9,7 +9,7 @@
 ### What needs to get done? 
 
 ## Part 1
-
+test
 Follow the directions in the code comments in the ```script.js``` file. You will need to:
 
 - Make references to DOM nodes

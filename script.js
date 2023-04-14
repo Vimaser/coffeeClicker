@@ -280,7 +280,7 @@ const buyTenCupUrnBtn = document.getElementById('ten_cup_urn');
 buyTenCupUrnBtn.addEventListener('click', function(event) {
   buyButtonClick(event, data, 'ten_cup_urn');
 });
-
+asd
 */
 
 // You do not need to edit this last line. This simple runs your tick function every 1000ms, or 1s

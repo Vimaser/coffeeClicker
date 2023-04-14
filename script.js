@@ -1,4 +1,4 @@
-/ Make your References to the two DOM nodes
+// Make your References to the two DOM nodes
 const buyButton = document.querySelector('.buy-button');
 
 // Create a reference to the element who's ID is 'big_coffee and call it bigCoffee

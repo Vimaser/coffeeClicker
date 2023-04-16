@@ -1,44 +1,33 @@
+// This line allows us to bring in the data object from our data.js file
+const data = window.data;
+
 // Make your References to the two DOM nodes
-const buyButton = document.querySelector('.buy-button');
+
 
 // Create a reference to the element who's ID is 'big_coffee and call it bigCoffee
 const bigCoffee = document.getElementById("big_coffee");
 // Create a reference to the element who's ID is 'producer_container' and call it producerContainer
-const producerContainer = document.getElementById("producer_container");
+const producerContainer = document.getElementById("produce_container");
 /**************
  *   SLICE 1
  **************/
 
 function updateCoffeeView(coffeeQty) {
   // Create a reference to the element who's ID is 'coffee_counter'
-  /*
   const coffeeCounter = document.getElementById("coffee_counter");
-  if (typeof coffeeQty === "number" && !isNaN(coffeeQty)) {
-    coffeeCounter.innerText = coffeeQty;
-  } else {
-    coffeeCounter.innerText = "NaN";}
-    */
+  coffeeCounter.innerText = coffeeQty;
+}
   // Set the innerText of that element to be the coffeeQty passed into this function
-  
-    //the above code was used to troubleshoot a NaN issue I ran into with the counter.
-    const coffeeCounter = document.getElementById('coffee_counter');
-    coffeeCounter.innerText = coffeeQty;
-    }
-
-
-
-  
+ 
+ 
 function clickCoffee(data) {
   // Increment the data object's (passed into this function) coffee property by one
-  data.coffee ++; 
-  console.log(data.coffee);
+  data.coffee++;
   // call the updateCoffeeView function and pass it the newly updated data.coffee property
   updateCoffeeView(data.coffee);
   // call the renderProducers function and pass it the data object
-  renderProducers(data); /*
-  data.coffee++;
-  coffeeCounter.innerText = data.coffee; */
- }  
+  renderProducers(data);
+}
 
 /**************
  *   SLICE 2
@@ -159,22 +148,7 @@ function attemptToBuyProducer(data, producerId) {
 }
 
 // You do not need to edit this function
-function buyButtonClick(event, data, buttonId) {
-  if (event.target.tagName === "BUTTON" && event.target.id === buttonId) {
-    const producerId = buttonId.slice(4);
-    const result = attemptToBuyProducer(data, producerId);
-    if (!result) {
-      window.alert("Not enough coffee!");
-    } else {
-      renderProducers(data);
-      updateCoffeeView(data.coffee);
-      updateCPSView(data.totalCPS);
-    }
-  }
-}
-
-
-/* function buyButtonClick(event, data) {
+function buyButtonClick(event, data) {
   if (event.target.tagName === "BUTTON") {
     const producerId = event.target.id.slice(4);
     const result = attemptToBuyProducer(data, producerId);
@@ -186,7 +160,7 @@ function buyButtonClick(event, data, buttonId) {
       updateCPSView(data.totalCPS);
     }
   }
-}  */
+}
 
 function tick(data) {
   // increment the data object's (passed into this function)
@@ -200,100 +174,41 @@ function tick(data) {
 
 // Event Listeners
 
+bigCoffee.addEventListener('click', function(event) {
+  clickCoffee(data);
+  buyButtonClick(event, data);  
+}); 
+
+
+window.addEventListener('click', function(event) {
+  buyButtonClick(event, data);
+});
+
+/*
+window.addEventListener('click', function(event) {
+  const producerMatch = window.data.producers.find(producer => event.target.id === "buy_" + producer.id);
+
+  if (!producerMatch ) {
+      // find returned undefined because no match so just exit the function
+      return;
+  }
+
+
+  console.log(producerMatch);
+
+  // if we got here we have a match so we can do something based on producerMatch which should be the producer matching the button
+
+        //Thanks to user shadowleaf on a forum I go to for providing this. I was stuck and my old code was a mess. 
+        //Much love!
+        //Also, my previous code was a mess because I targeted every element but window, so I this is fresh code.
+})
+*/
 // add a 'click' event listener to the bigCoffee element (that you referenced above)
 // the event listener should call the clickCoffee function, and pass in the global data object
-/*
-buyButton.addEventListener('click', function(event) {
-  buyButtonClick(event, data);
-});
-
-bigCoffee.addEventListener('click', function() {
-  clickCoffee(data);
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-  const buyChemexPressBtn = document.getElementById('buy_chemex');
-  buyChemexPressBtn.addEventListener('click', function(event) {
-    buyButtonClick(event, data, 'buy_chemex');
-  });
-*/
-
-// add click event listener to the bigCoffee element
-bigCoffee.addEventListener('click', function() {
-  clickCoffee(data);
-});
-
-// add click event listener to the buyButton element
-buyButton.addEventListener('click', function(event) {
-  buyButtonClick(event, data);
-});
-
-
-/*
-bigCoffee.addEventListener('click', function() {
-  clickCoffee(window.data);
-});
-*/
 
 // add a 'click' event listener to the element (referenced at the top of the file)
 // the event listener should call the buyButtonClick function and pass it the event, and the global data object
 
-
-/*
-document.addEventListener('DOMContentLoaded', function() {
-  const buyChemexPressBtn = document.getElementById('buy_chemex');
-  buyChemexPressBtn.addEventListener('click', function(event) {
-    buyButtonClick(event, data, 'buy_chemex');
-  });
-}); 
-*/
-
-/*
-window.onclick = function(event) {
-  if (event.target.id === 'producer_container') {
-    buy_chemex.addEventListener('click', function(event) {
-      buyButtonClick(event, data, 'producer_container');
-    })
-       
-  }
-
-}
-function buyButtonClick(event, data, id) {
-  console.log(`Event: ${event}\nData: ${JSON.stringify(data, null, 2)}\nID: ${id}`);
-}
-
-bigCoffee.addEventListener('click', function() {
-  clickCoffee(data);
-});
-
-buy_chemex.addEventListener('click', function(event) {
-  buyButtonClick(event, data, 'buy_chemex');
-});
-
-function buyButtonClick(event, data, id) {
-  console.log(`Event: ${event}\nData: ${JSON.stringify(data, null, 2)}\nID: ${id}`);
-}
-
-bigCoffee.addEventListener('click', function() {
-  clickCoffee(data);
-});
-
-producerContainer.addEventListener('click', function(event) {
-  buyButtonClick(event, data, 'buy_chemex');
-});
-
-/*
-const buyFrenchPressBtn = document.getElementById('french_press');
-buyFrenchPressBtn.addEventListener('click', function(event) {
-  buyButtonClick(event, data, 'french_press');
-});
-
-const buyTenCupUrnBtn = document.getElementById('ten_cup_urn');
-buyTenCupUrnBtn.addEventListener('click', function(event) {
-  buyButtonClick(event, data, 'ten_cup_urn');
-});
-asd
-*/
 
 // You do not need to edit this last line. This simple runs your tick function every 1000ms, or 1s
 setInterval(() => tick(data), 1000); 
